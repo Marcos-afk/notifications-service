@@ -6,19 +6,19 @@ import {
   MaxLength,
 } from 'class-validator';
 
-export class CreateNotificationDto {
-  @IsNotEmpty({ message: 'Campo recipient_id é requerido' })
+export class SendNotificationDto {
+  @IsNotEmpty({ message: 'Campo id do recipiente é requerido' })
   @IsUUID(4, {
     each: true,
-    message: 'Campo recipient_id deve ser um uuid de versão 4',
+    message: 'Campo id do recipiente deve ser um uuid de versão 4',
   })
   readonly recipient_id: string;
 
   @IsNotEmpty({ message: 'Campo conteúdo é requerido' })
   @IsString({ message: 'Campo conteúdo deve ser uma string' })
   @MinLength(5, { message: 'Campo conteúdo deve ter no mínimo 5 caracteres' })
-  @MaxLength(250, {
-    message: 'Campo conteúdo deve ter no máximo 250 caracteres',
+  @MaxLength(240, {
+    message: 'Campo conteúdo deve ter no máximo 240 caracteres',
   })
   readonly content: string;
 
