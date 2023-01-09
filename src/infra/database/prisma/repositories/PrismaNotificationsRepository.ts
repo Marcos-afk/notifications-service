@@ -16,4 +16,12 @@ export class PrismaNotificationsRepository
       data: raw,
     });
   }
+
+  async findById(notification_id: string): Promise<Notification | null> {
+    throw new Error('não implementado');
+  }
+
+  async save(notification: Notification): Promise<void> {
+    throw new Error('não implementado');
+  }
 }
