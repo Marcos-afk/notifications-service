@@ -5,7 +5,5 @@ import { HttpModule } from './infra/http/http.module';
 
 @Module({
   imports: [ConfigModule.forRoot(), HttpModule, DatabaseModule],
-  controllers: [],
-  providers: [],
 })
 export class AppModule {}

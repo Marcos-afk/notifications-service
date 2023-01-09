@@ -4,7 +4,7 @@ import { DatabaseModule } from '../database/database.module';
 import { NotificationsController } from './controllers/notifications.controller';
 
 @Module({
-  exports: [DatabaseModule],
+  imports: [DatabaseModule],
   controllers: [NotificationsController],
   providers: [SendNotificationUseCase],
 })
