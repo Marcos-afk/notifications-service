@@ -1,5 +1,4 @@
-import { Content } from '@application/entities/Content';
-import { Notification } from '@application/entities/Notification';
+import { makeNotification } from '@application/factories/notification-factory';
 import { NotificationsRepositoryInMemory } from '@application/in-memory/NotificationsRepositoryInMemory';
 import { NotificationNotFoundError } from '../errors/notification-not-found-error';
 import { CancelNotificationUseCase } from './CancelNotificationUseCase';
@@ -16,11 +15,7 @@ describe('Cancel notification use case', () => {
   });
 
   it('should be able to cancel a notification', async () => {
-    const notification = new Notification({
-      content: new Content('Você recebeu uma nova solicitação de amizade'),
-      recipient_id: '2e4e2157-1e71-4918-8af6-d255622a6465',
-      category: 'social',
-    });
+    const notification = makeNotification();
 
     await notificationsRepositoryInMemory.create(notification);
     await cancelNotificationUseCase.execute({

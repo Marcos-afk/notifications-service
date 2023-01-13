@@ -21,6 +21,10 @@ export class PrismaNotificationsRepository
     throw new Error('não implementado');
   }
 
+  async countManyByRecipientId(recipient_id: string): Promise<number> {
+    throw new Error('não implementado');
+  }
+
   async save(notification: Notification): Promise<void> {
     throw new Error('não implementado');
   }
