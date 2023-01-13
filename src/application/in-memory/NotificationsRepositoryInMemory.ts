@@ -6,6 +6,10 @@ export class NotificationsRepositoryInMemory
 {
   public notifications: Notification[] = [];
 
+  async findManyByRecipientId(recipient_id: string): Promise<Notification[]> {
+    return this.notifications.filter(n => n.recipientId === recipient_id);
+  }
+
   async create(notification: Notification): Promise<void> {
     this.notifications.push(notification);
   }

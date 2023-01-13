@@ -10,6 +10,10 @@ export class PrismaNotificationsRepository
 {
   constructor(private prismaService: PrismaService) {}
 
+  async findManyByRecipientId(recipient_id: string): Promise<Notification[]> {
+    throw new Error('não implementado');
+  }
+
   async create(notification: Notification): Promise<void> {
     const raw = PrismaNotificationMapper.toPrisma(notification);
     await this.prismaService.notification.create({

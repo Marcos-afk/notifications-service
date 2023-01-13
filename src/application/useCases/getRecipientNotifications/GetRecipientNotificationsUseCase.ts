@@ -3,14 +3,13 @@ import { NotificationsRepositoryProps } from '@application/repositories/Notifica
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class CountRecipientNotificationsUseCase {
+export class GetRecipientNotificationsUseCase {
   constructor(private notificationsRepository: NotificationsRepositoryProps) {}
 
   async execute({ recipient_id }: RecipientNotificationsDto) {
-    const count = await this.notificationsRepository.countManyByRecipientId(
-      recipient_id,
-    );
+    const notifications =
+      await this.notificationsRepository.findManyByRecipientId(recipient_id);
 
-    return count;
+    return notifications;
   }
 }
