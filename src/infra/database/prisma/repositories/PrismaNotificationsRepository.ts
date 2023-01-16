@@ -11,7 +11,33 @@ export class PrismaNotificationsRepository
   constructor(private prismaService: PrismaService) {}
 
   async findManyByRecipientId(recipient_id: string): Promise<Notification[]> {
-    throw new Error('não implementado');
+    const notifications = await this.prismaService.notification.findMany({
+      where: { recipient_id },
+    });
+
+    return notifications.map(notification =>
+      PrismaNotificationMapper.toDomain(notification),
+    );
+  }
+
+  async findById(notification_id: string): Promise<Notification | null> {
+    const notification = await this.prismaService.notification.findUnique({
+      where: { id: notification_id },
+    });
+
+    if (!notification) {
+      return null;
+    }
+
+    return PrismaNotificationMapper.toDomain(notification);
+  }
+
+  async countManyByRecipientId(recipient_id: string): Promise<number> {
+    const count = await this.prismaService.notification.count({
+      where: { recipient_id },
+    });
+
+    return count;
   }
 
   async create(notification: Notification): Promise<void> {
@@ -21,15 +47,11 @@ export class PrismaNotificationsRepository
     });
   }
 
-  async findById(notification_id: string): Promise<Notification | null> {
-    throw new Error('não implementado');
-  }
-
-  async countManyByRecipientId(recipient_id: string): Promise<number> {
-    throw new Error('não implementado');
-  }
-
   async save(notification: Notification): Promise<void> {
-    throw new Error('não implementado');
+    const raw = PrismaNotificationMapper.toPrisma(notification);
+    await this.prismaService.notification.update({
+      where: { id: raw.id },
+      data: raw,
+    });
   }
 }
