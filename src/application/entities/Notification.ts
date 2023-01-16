@@ -52,12 +52,16 @@ export class Notification {
     this.props.canceled_at = new Date();
   }
 
-  public get canceledAt(): Date | null | undefined {
-    return this.props.canceled_at;
+  public read() {
+    this.props.read_at = new Date();
   }
 
-  public set readAt(read_at: Date) {
-    this.props.read_at = read_at;
+  public unread() {
+    this.props.read_at = null;
+  }
+
+  public get canceledAt(): Date | null | undefined {
+    return this.props.canceled_at;
   }
 
   public get readAt(): Date | null | undefined {

@@ -4,7 +4,7 @@ import { Injectable } from '@nestjs/common';
 import { NotificationNotFoundError } from '../errors/notification-not-found-error';
 
 @Injectable()
-export class CancelNotificationUseCase {
+export class UnreadNotificationUseCase {
   constructor(private notificationsRepository: NotificationsRepositoryProps) {}
 
   public async execute({ notification_id }: FindNotificationDto) {
@@ -16,7 +16,7 @@ export class CancelNotificationUseCase {
       throw new NotificationNotFoundError();
     }
 
-    notification.cancel();
+    notification.unread();
     await this.notificationsRepository.save(notification);
   }
 }

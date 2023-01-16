@@ -1,6 +1,6 @@
 import { IsNotEmpty, IsUUID } from 'class-validator';
 
-export class CancelNotificationDto {
+export class FindNotificationDto {
   @IsNotEmpty({ message: 'Campo id da notificação é requerido' })
   @IsUUID(4, {
     each: true,
