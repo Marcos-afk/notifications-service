@@ -19,5 +19,6 @@ import { UnreadNotificationUseCase } from '@application/useCases/unreadNotificat
     ReadNotificationUseCase,
     UnreadNotificationUseCase,
   ],
+  exports: [],
 })
 export class HttpModule {}

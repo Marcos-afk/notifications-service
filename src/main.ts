@@ -2,6 +2,8 @@ import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { Signale } from 'signale';
+import { MicroserviceOptions } from '@nestjs/microservices/interfaces';
+import { KafkaConsumerService } from '@infra/messaging/kafka/kafka-consumer.service';
 
 async function bootstrap() {
   const log = new Signale();
@@ -17,6 +19,11 @@ async function bootstrap() {
       }),
     );
 
+    app.connectMicroservice<MicroserviceOptions>({
+      strategy: app.get(KafkaConsumerService),
+    });
+
+    await app.startAllMicroservices();
     await app.listen(process.env.PORT);
 
     return log
